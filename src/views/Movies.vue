@@ -4,9 +4,11 @@
     <div class="movie-list">
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <div class="movie-card-content">
-          <h2>{{ movie.title }}</h2>
-          <p>{{ movie.year }}</p>
-          <p>{{ movie.description }}</p>
+          <router-link :to="'/movie/' + movie.id">
+            <h2>{{ movie.title }}</h2>
+            <p>{{ movie.year }}</p>
+            <p>{{ movie.description }}</p>
+          </router-link>
         </div>
       </div>
     </div>

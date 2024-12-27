@@ -4,13 +4,14 @@ import Category from "../views/Category.vue";
 import Gun from "../views/Gun.vue";
 import Movies from "../views/Movies.vue";        // Import Movies View
 import VideoGames from "../views/VideoGames.vue"; // Import VideoGames View
-
+import MovieDetail from "../views/MovieDetail.vue";
 const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/category/:id", name: "Category", component: Category },
   { path: "/gun/:id", name: "Gun", component: Gun },
   { path: "/movies", name: "Movies", component: Movies },        // New route for Movies
   { path: "/video-games", name: "VideoGames", component: VideoGames }, // New route for Video Games
+  { path: '/movie/:id', name: 'MovieDetail', component: MovieDetail },
 ];
 
 const router = createRouter({
