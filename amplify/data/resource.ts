@@ -1,4 +1,5 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData, } from "@aws-amplify/backend";
+
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -7,12 +8,73 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  // Weapon Model
+  Weapon: a
     .model({
-      content: a.string(),
+      id: a.id().required(),
+      name: a.string().required(),
+      description: a.string(),
+      price: a.string(),
+      affiliateLink: a.string(),
+      // One-to-many with WeaponMovie (through the join table)
+      movies: a.hasMany('WeaponMovie', 'weaponId'),
+      // One-to-many with WeaponVideoGame (through the join table)
+      videoGames: a.hasMany('WeaponVideoGame', 'weaponId')
+    })
+    .secondaryIndexes((index) => [index('name')]) // Optional secondary index on name for performance
+    .authorization((allow) => [allow.publicApiKey()]),
+
+  // Movie Model
+  Movie: a
+    .model({
+      id: a.id().required(),
+      title: a.string().required(),
+      description: a.string(),
+      year: a.integer(), // Use a.integer() for the year
+      // One-to-many with WeaponMovie (through the join table)
+      weapons: a.hasMany('WeaponMovie', 'movieId'),
+    })
+    .secondaryIndexes((index) => [index('title')]) // Optional secondary index on title for performance
+    .authorization((allow) => [allow.publicApiKey()]),
+
+  // VideoGame Model
+  VideoGame: a
+    .model({
+      id: a.id().required(),
+      title: a.string().required(),
+      description: a.string(),
+      year: a.integer(), // Use a.integer() for the year
+      // One-to-many with WeaponVideoGame (through the join table)
+      weapons: a.hasMany('WeaponVideoGame', 'videoGameId')
+    })
+    .secondaryIndexes((index) => [index('title')]) // Optional secondary index on title for performance
+    .authorization((allow) => [allow.publicApiKey()]),
+
+  // Join Table for Weapon and Movie
+  WeaponMovie: a
+    .model({
+      id: a.id().required(),
+      weaponId: a.id().required(), // Foreign Key to Weapon
+      movieId: a.id().required(), // Foreign Key to Movie
+      weapon: a.belongsTo('Weapon', 'weaponId'), // Belongs to Weapon
+      movie: a.belongsTo('Movie', 'movieId') // Belongs to Movie
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+
+  // Join Table for Weapon and VideoGame
+  WeaponVideoGame: a
+    .model({
+      id: a.id().required(),
+      weaponId: a.id().required(), // Foreign Key to Weapon
+      videoGameId: a.id().required(), // Foreign Key to VideoGame
+      weapon: a.belongsTo('Weapon', 'weaponId'), // Belongs to Weapon
+      videoGame: a.belongsTo('VideoGame', 'videoGameId') // Belongs to VideoGame
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
+
+
+
 
 export type Schema = ClientSchema<typeof schema>;
 
