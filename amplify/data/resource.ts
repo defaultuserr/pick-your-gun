@@ -30,6 +30,7 @@ const schema = a.schema({
       year: a.integer(), 
       genre: a.string(),
       rating: a.string(),
+      type: a.string(), 
       // One-to-many with WeaponMovie (through the join table)
       weapons: a.hasMany('WeaponMovie', 'movieId'),
     })
