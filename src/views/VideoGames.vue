@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Video Games List</h1>
+    <h1>Video Games Liste</h1>
     <div class="game-list">
       <div class="game-card" v-for="game in videoGames" :key="game.id">
         <div class="game-card-content">
