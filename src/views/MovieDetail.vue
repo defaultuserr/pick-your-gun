@@ -3,14 +3,32 @@
     <h1>{{ movie.title }}</h1>
     <p>{{ movie.description }}</p>
     <h2>Weapons in this Movie</h2>
-    <div v-if="weapons.length > 0">
+
+    <div v-if="isLoadingWeapons">
+      <div v-for="index in weaponPlaceholderCount" :key="index" class="weapon-placeholder">
+        <div class="weapon-placeholder-name"></div>
+        <div class="weapon-placeholder-description"></div>
+      </div>
+    </div>
+
+    <div v-else-if="weapons.length > 0">
       <ul>
-        <li v-for="weapon in weapons" :key="weapon.id">
-          <h3>{{ weapon.name }}</h3>
-          <p>{{ weapon.description }}</p>
-        </li>
+        <!-- Wrap the entire li in router-link to make the whole card clickable -->
+        <router-link 
+          v-for="weapon in weapons" 
+          :key="weapon.id" 
+          :to="'/weapon/' + weapon.id" 
+          class="weapon-item-link"
+        >
+          <li class="weapon-item">
+            <!-- Weapon content -->
+            <h3>{{ weapon.name }}</h3>
+            <p>{{ weapon.description }}</p>
+          </li>
+        </router-link>
       </ul>
     </div>
+
     <div v-else>
       <p>No weapons found for this movie.</p>
     </div>
@@ -32,46 +50,49 @@ export default defineComponent({
     const client = generateClient();
     const movie = ref(null);
     const weapons = ref([]);
+    const isLoadingWeapons = ref(true); // Track the loading state for weapons
+    const weaponPlaceholderCount = ref(5); // Number of placeholder weapons to show
 
     const fetchMovieDetails = async () => {
       try {
-        // Get the movie ID from the route params
         const movieId = route.params.id;
 
-        // Fetch the movie details
         const { data: movieData, errors: movieErrors } = await client.models.Movie.get({ id: movieId });
         if (movieErrors) {
           console.error('Error fetching movie:', movieErrors);
         } else {
           movie.value = movieData;
 
-          // Fetch weapon relationships associated with the movie by movieId
           const { data: weaponMoviesData, errors: weaponMoviesErrors } = await client.models.WeaponMovie.list({
-            filter: { movieId: { eq: movieId } }, // Filter by movieId
+            filter: { movieId: { eq: movieId } },
           });
 
           if (weaponMoviesErrors) {
             console.error('Error fetching WeaponMovie relationships:', weaponMoviesErrors);
           } else {
-            // Extract weapon IDs from the relationships
             const weaponIds = weaponMoviesData.map((wm) => wm.weaponId);
 
-            // Iterate over weaponIds and fetch each weapon separately
-            for (const weaponId of weaponIds) {
-              const { data: weaponData, errors: weaponErrors } = await client.models.Weapon.get({
-                id: weaponId,
-              });
+            if (weaponIds.length > 0) {
+              const weaponFetchPromises = weaponIds.map((weaponId) =>
+                client.models.Weapon.get({ id: weaponId })
+              );
 
-              if (weaponErrors) {
-                console.error(`Error fetching weapon ${weaponId}:`, weaponErrors);
-              } else {
-                weapons.value.push(weaponData); // Add the fetched weapon data to the list
-              }
+              const weaponResults = await Promise.all(weaponFetchPromises);
+
+              weaponResults.forEach((result) => {
+                if (result.errors) {
+                  console.error(`Error fetching weapon ${result.data.id}:`, result.errors);
+                } else {
+                  weapons.value.push(result.data);
+                }
+              });
             }
           }
         }
       } catch (error) {
         console.error('Error fetching movie details or weapons:', error);
+      } finally {
+        isLoadingWeapons.value = false;
       }
     };
 
@@ -80,13 +101,14 @@ export default defineComponent({
     return {
       movie,
       weapons,
+      isLoadingWeapons,
+      weaponPlaceholderCount,
     };
   },
 });
 </script>
 
 <style scoped>
-/* Add some styling to enhance the look */
 h1 {
   color: #333;
   font-size: 2em;
@@ -107,14 +129,53 @@ li {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
+  transition: transform 0.3s ease; /* Smooth transition for the hover effect */
 }
 
-h3 {
-  font-size: 1.2em;
-  margin: 0;
+/* Hover effect for the weapon card */
+.weapon-item:hover {
+  transform: translateY(-5px); /* Move the item upwards on hover */
 }
 
-p {
-  color: #666;
+/* Styling for router-link around the whole list item */
+.weapon-item-link {
+  text-decoration: none; /* Remove the default link underline */
+  display: block; /* Ensure the entire li is clickable */
+  color: inherit; /* Use the default color */
+}
+
+
+
+.weapon-placeholder {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.weapon-placeholder-name {
+  height: 20px;
+  background-color: #ddd;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.weapon-placeholder-description {
+  height: 15px;
+  background-color: #ddd;
+  width: 90%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 </style>
