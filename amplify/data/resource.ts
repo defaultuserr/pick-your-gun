@@ -29,6 +29,7 @@ const schema = a.schema({
       description: a.string(),
       year: a.integer(), 
       genre: a.string(),
+      genre_search: a.string(),
       rating: a.string(),
       type: a.string(), 
       // One-to-many with WeaponMovie (through the join table)
@@ -50,6 +51,22 @@ const schema = a.schema({
       movie: a.belongsTo('Movie', 'movieId') // Belongs to Movie
     })
     .authorization((allow) => [allow.publicApiKey()]),
+
+    MovieGenre: a
+    .model({
+      id: a.id().required(),
+      genre: a.id().required(), // Foreign Key to Weapon
+  
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+    GameGenre: a
+    .model({
+      id: a.id().required(),
+      genre: a.id().required(), // Foreign Key to Weapon
+  
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+    
 
 });
 

@@ -1,6 +1,15 @@
 <template>
   <div>
     <h1>Movies List</h1>
+   <div class="filter-bar">
+    <label for="genre-filter">Filter by Genre:</label>
+    <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
+      <option value="">All</option> <!-- Default option -->
+      <option v-for="genre in genres" :key="genre" :value="genre">
+        {{ genre }}
+      </option>
+    </select>
+  </div>
     <div class="movie-list">
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <div class="movie-card-content">
@@ -59,5 +68,19 @@ h1 {
 .movie-card-content p {
   font-size: 1em;
   color: #666;
+}
+.filter-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-bar label {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.filter-bar select {
+  padding: 5px 10px;
+  font-size: 16px;
 }
 </style>
