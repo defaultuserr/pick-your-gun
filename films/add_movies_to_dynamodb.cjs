@@ -20,7 +20,7 @@ const readJsonFile = (filePath) => {
 };
 
 // Path to your movie-list.json file
-const filePath = './game-list.json';
+const filePath = './movie-list.json';
 const movieData = readJsonFile(filePath);
 
 
@@ -103,8 +103,9 @@ const processMoviesAndWeapons = async () => {
     console.log(`Processing Movie: ${movie.title}`);
     console.log(`Year: ${movie.year}`);
     console.log(`Genre: ${movie.genre}`);
+    console.log(`Genre search: `);
+    console.log(movie.genre.toLowerCase())
     console.log(`Type: ${movie.type}`);
-
     // Check if the movie already exists in the database
     let movieId;
     const movieExistsFlag = await movieExists(movie.title);
@@ -126,6 +127,7 @@ const processMoviesAndWeapons = async () => {
           title: movie.title,
           year: movie.year,
           genre: movie.genre,
+          genre_search: movie.genre.toLowerCase(),
           type: movie.type,  // Include type attribute
           weapons: movie.weapons.map(weapon => weapon.id),
         });
