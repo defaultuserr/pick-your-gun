@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import defineComponent from './Movies.js';
+import defineComponent from './movies.js';
 
 export default {
   ...defineComponent,
