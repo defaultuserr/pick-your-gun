@@ -3,18 +3,22 @@
     <nav>
       <router-link to="/" class="nav-link">Home</router-link>
       <router-link to="/movies" class="nav-link">Movies</router-link>
-      <router-link to="/video-games" class="nav-link">Video Games</router-link>
+      <router-link to="/game" class="nav-link">Video Games</router-link>
     </nav>
+
     <div class="content">
       <router-view></router-view> <!-- This is where the routed components will be displayed -->
     </div>
   </div>
+
 </template>
 
 <script>
+import defineComponent from './app.js';
+
 export default {
-  name: 'App'
-}
+  ...defineComponent,
+};
 </script>
 
 <style>
@@ -65,4 +69,5 @@ nav {
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 </style>
