@@ -15,7 +15,8 @@ export const sharedMethods = {
     do {
       const result = await client.models[modelName].list({
         filter: filter,
-        nextToken: nextToken // Pass the token for pagination
+        nextToken: nextToken, // Pass the token for pagination
+        
       });
   
       if (result.errors) {

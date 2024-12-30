@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Movies List</h1>
+
    <div class="filter-bar">
     <label for="genre-filter">Filter by Genre:</label>
     <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
@@ -9,7 +10,21 @@
         {{ genre }}
       </option>
     </select>
+
+
+      <!-- Media Type Filter -->
+      <label for="media-type-filter" class="media-filter-label">Filter by Media Type:</label>
+     <select id="media-type-filter" v-model="selectedMediaType" @change="fetchMovies">
+  <option value="">All</option>
+  <option v-for="type in mediaTypes" :key="type" :value="type">
+    {{ type }}
+  </option>
+</select>
+
   </div>
+
+
+  
     <div class="movie-list">
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <div class="movie-card-content">
@@ -69,6 +84,7 @@ h1 {
   font-size: 1em;
   color: #666;
 }
+
 .filter-bar {
   margin-bottom: 20px;
   text-align: center;
@@ -82,5 +98,9 @@ h1 {
 .filter-bar select {
   padding: 5px 10px;
   font-size: 16px;
+}
+
+.media-filter-label {
+  margin-left: 20px;
 }
 </style>
