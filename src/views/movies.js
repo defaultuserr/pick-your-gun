@@ -3,51 +3,50 @@ import { generateClient } from 'aws-amplify/data';
 import { fetchAllPaginatedData } from '../shared.js';
 
 export default defineComponent({
-  name: 'Movies',
+  name: 'MediaBrowser',
   setup() {
     const client = generateClient();
     const movies = ref([]);
     const genres = ref([]); // Holds the dynamic genres list
-    const mediaTypes = ref(['Movies',  'Videogames']); // Static media types
+    const mediaTypes = ref(['Movies', 'Videogames']); // Static media types
     const selectedGenre = ref('');
-    const selectedMediaType = ref(''); // New state for media type filtering
+    const selectedMediaType = ref(''); // State for media type filtering
 
     const fetchMovies = async () => {
       try {
         const filter = {};
-    
-    
-    
+
         // Apply genre filter
         if (selectedGenre.value) {
           filter.genre_search = { contains: selectedGenre.value.toLowerCase() }; // Filter by genre
         }
-    
-      
-    
-        // Fetch movies dynamically based on selected media type
-        const mediaTypeModel = selectedMediaType.value || 'Movie'; // Default to 'Movie' if no media type is selected
-      
-        let type_value = "";
-        switch (mediaTypeModel) {
+
+        // Determine the media type for filtering
+        let type_value = '';
+        switch (selectedMediaType.value) {
           case 'Movies':
-            type_value = "movie";
+            type_value = 'movie';
             break;
           case 'Videogames':
-            type_value = "game";
+            type_value = 'game';
             break;
           case 'All':
-            type_value = "";
+            type_value = ''; // No specific type
+            break;
           default:
-            type_value = "";
+            type_value = ''; // Default to all if no type selected
         }
-        // add type to filter
-      
-       filter.type = { eq: type_value }
-       console.log("my filter")
-       console.log(filter)
-      const result = await fetchAllPaginatedData(client, "Movie", filter);
-        
+
+        // Add type filter if applicable
+        if (type_value) {
+          filter.type = { eq: type_value };
+        }
+
+        console.log('Filter applied:', filter);
+
+        // Fetch movies dynamically based on selected media type
+        const result = await fetchAllPaginatedData(client, 'Movie', filter);
+
         console.log('Fetched movies:', result);
         movies.value = result;
       } catch (error) {
@@ -57,12 +56,31 @@ export default defineComponent({
 
     const fetchGenres = async () => {
       try {
-        console.log("Fetching genres...");
-        let genres_list = await client.models.MovieGenre.list();
-        genres.value = genres_list.data; // Fetch unique genres dynamically
-        const genres_list_cleaned = genres_list.data.map(item => item.genre);
-        genres.value = genres_list_cleaned;
-        console.log(genres_list_cleaned);
+        console.log('Fetching genres...');
+        if (!selectedMediaType.value) {
+          genres.value = []; // Clear genres if no media type is selected
+          return;
+        }
+
+        // Fetch genres based on media type
+        let genreModel = '';
+        switch (selectedMediaType.value) {
+          case 'Movies':
+            genreModel = 'MovieGenre';
+            break;
+          case 'Videogames':
+            genreModel = 'GameGenre';
+            break;
+          default:
+            genres.value = [];
+            return;
+        }
+
+        const genresList = await client.models[genreModel].list();
+        const cleanedGenres = genresList.data.map((item) => item.genre);
+        genres.value = cleanedGenres;
+
+        console.log('Fetched genres:', cleanedGenres);
       } catch (error) {
         console.error('Error fetching genres:', error);
       }
@@ -73,9 +91,15 @@ export default defineComponent({
       await fetchMovies(); // Fetch movies on mount
     });
 
-    watch([selectedGenre, selectedMediaType], () => {
-      console.log('Filters updated:', { genre: selectedGenre.value, mediaType: selectedMediaType.value });
-      fetchMovies(); // Refetch movies when filters change
+    watch(selectedMediaType, async () => {
+      console.log('Selected media type changed:', selectedMediaType.value);
+      await fetchGenres(); // Refetch genres when media type changes
+      await fetchMovies(); // Refetch movies when media type changes
+    });
+
+    watch(selectedGenre, async () => {
+      console.log('Selected genre changed:', selectedGenre.value);
+      await fetchMovies(); // Refetch movies when genre changes
     });
 
     return {
