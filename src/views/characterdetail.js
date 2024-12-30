@@ -1,6 +1,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { generateClient } from 'aws-amplify/data';
 import { useRoute } from 'vue-router';
+import defaultImage from '@/assets/images/ranger.jpg'; // Adjust path as necessary
 
 export default defineComponent({
   name: 'CharacterDetail',
@@ -26,7 +27,7 @@ export default defineComponent({
     onMounted(fetchCharacterDetails);
 
     return {
-      character,
+      character, defaultImage, 
     };
   },
 })

@@ -2,7 +2,8 @@
   <div v-if="character" class="character-details">
     <div class="character-card">
     
-      <img :src="character.image_url || require('@/assets/images/ranger.jpg')" alt="Character Image" class="character-image" />
+      <img :src="defaultImage" alt="Character Image" class="character-image" />
+
       <div class="character-info">
         <h1>{{ character.character }}</h1>
         <p><strong>Difficulty:</strong> {{ character.difficulty }}</p>
