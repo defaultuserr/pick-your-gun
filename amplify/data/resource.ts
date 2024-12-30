@@ -8,65 +8,30 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  // Weapon Model
-  Weapon: a
-    .model({
-      name: a.string().required(),
-      description: a.string(),
-      price: a.string(),
-      affiliateLink: a.string(),
-      // One-to-many with WeaponMovie (through the join table)
-      movies: a.hasMany('WeaponMovie', 'weaponId'),
-
-    })
-    .secondaryIndexes((index) => [index('name')]) // Optional secondary index on name for performance
-    .authorization((allow) => [allow.publicApiKey()]),
-
-  // Movie Model
-  Movie: a
-    .model({
-      title: a.string().required(),
-      description: a.string(),
-      year: a.integer(), 
-      genre: a.string(),
-      genre_search: a.string(),
-      rating: a.string(),
-      type: a.string(), 
-      // One-to-many with WeaponMovie (through the join table)
-      weapons: a.hasMany('WeaponMovie', 'movieId'),
-    })
-    .secondaryIndexes((index) => [index('title')]) // Optional secondary index on title for performance
-    .authorization((allow) => [allow.publicApiKey()]),
-
-  // VideoGame Model
-
-
-  // Join Table for Weapon and Movie
-  WeaponMovie: a
-    .model({
-      id: a.id().required(),
-      weaponId: a.id().required(), // Foreign Key to Weapon
-      movieId: a.id().required(), // Foreign Key to Movie
-      weapon: a.belongsTo('Weapon', 'weaponId'), // Belongs to Weapon
-      movie: a.belongsTo('Movie', 'movieId') // Belongs to Movie
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-
-    MovieGenre: a
-    .model({
-      id: a.id().required(),
-      genre: a.id().required(), // Foreign Key to Weapon
-  
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-    GameGenre: a
-    .model({
-      id: a.id().required(),
-      genre: a.id().required(), // Foreign Key to Weapon
-  
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-    
+  // Media Model
+   Media: a
+  .model({
+    id: a.id().required(),
+    type: a.string().required(), // "movie", "game", or "series"
+    title: a.string().required(),
+    genre: a.string(), // e.g., "Fantasy", "Adventure"
+    release_year: a.integer(),
+    cosplay_recommendations: a.hasMany('CosplayRecommendation', 'mediaId'), // One-to-many relationship
+  })
+  .secondaryIndexes((index) => [index('title')]) // Index for title for better search performance
+  .authorization((allow) => [allow.publicApiKey()]),
+  // Cosplay Recommendation
+  CosplayRecommendation: a
+  .model({
+    id: a.id().required(),
+    mediaId: a.id().required(), // Foreign key linking to Media
+    character: a.string().required(),
+    difficulty: a.string().required(), // e.g., "Easy", "Medium", "Hard", "Expert"
+    key_items: a.string().array(), // List of specific cosplay items
+    image_url: a.string(), // URL for character image
+    media: a.belongsTo('Media', 'mediaId'), // One-to-one relationship
+  })
+  .authorization((allow) => [allow.publicApiKey()]),
 
 });
 

@@ -3,13 +3,7 @@
     <h1>Movies List</h1>
 
    <div class="filter-bar">
-    <label for="genre-filter">Filter by Genre:</label>
-    <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
-      <option value="">All</option> <!-- Default option -->
-      <option v-for="genre in genres" :key="genre" :value="genre">
-        {{ genre }}
-      </option>
-    </select>
+
 
 
       <!-- Media Type Filter -->
@@ -21,6 +15,15 @@
   </option>
 </select>
 
+
+    <label for="genre-filter">Filter by Genre:</label>
+    <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
+      <option value="">All</option> <!-- Default option -->
+      <option v-for="genre in genres" :key="genre" :value="genre">
+        {{ genre }}
+      </option>
+    </select>
+
   </div>
 
 
@@ -28,7 +31,7 @@
     <div class="movie-list">
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <div class="movie-card-content">
-          <router-link :to="'/movie/' + movie.id">
+          <router-link :to="'/media/' + movie.id">
             <h2>{{ movie.title }}</h2>
             <p>{{ movie.year }}</p>
             <p>{{ movie.description }}</p>
@@ -40,7 +43,7 @@
 </template>
 
 <script>
-import defineComponent from './movies.js';
+import defineComponent from './media.js';
 
 export default {
   ...defineComponent,

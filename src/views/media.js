@@ -45,7 +45,7 @@ export default defineComponent({
         console.log('Filter applied:', filter);
 
         // Fetch movies dynamically based on selected media type
-        const result = await fetchAllPaginatedData(client, 'Movie', filter);
+        const result = await fetchAllPaginatedData(client, 'Media', filter);
 
         console.log('Fetched movies:', result);
         movies.value = result;

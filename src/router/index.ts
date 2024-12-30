@@ -1,16 +1,20 @@
 import type { RouteRecordRaw } from 'vue-router';  // Use `import type` for types
 import { createRouter, createWebHistory, } from 'vue-router';
 import Home from '../views/Home.vue';
-import Movies from '../views/Movies.vue';  // Import Movies View
+import Movies from '../views/Media.vue';  // Import Movies View
+import CharacterDetail from '../views/CharacterDetail.vue'; // Import Character Details View
+import MediaDetail from '../views/MediaDetail.vue';
 
-import MovieDetail from '../views/MovieDetail.vue';
-import WeaponDetail from '../views/WeaponDetail.vue';
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/weapon/:id', component: WeaponDetail },
   { path: '/movies', name: 'Movies', component: Movies },
-  { path: '/movie/:id', name: 'MovieDetail', component: MovieDetail },
+  { path: '/media/:id', name: 'MediaDetail', component: MediaDetail },
+  {
+    path: '/character/:id',
+    name: 'CharacterDetail',
+    component: CharacterDetail, 
+  },
 ];
 
 const router = createRouter({

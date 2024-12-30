@@ -2,42 +2,41 @@
   <div v-if="movie">
     <h1>{{ movie.title }}</h1>
     <p>{{ movie.description }}</p>
-    <h2>Weapons in this Movie</h2>
+    <h2>Characters in this Movie</h2>
 
-    <div v-if="isLoadingWeapons">
-      <div v-for="index in weaponPlaceholderCount" :key="index" class="weapon-placeholder">
-        <div class="weapon-placeholder-name"></div>
-        <div class="weapon-placeholder-description"></div>
+    <div v-if="isLoadingCharacters">
+      <div v-for="index in characterPlaceholderCount" :key="index" class="character-placeholder">
+        <div class="character-placeholder-name"></div>
+        <div class="character-placeholder-description"></div>
       </div>
     </div>
 
-    <div v-else-if="weapons.length > 0">
+    <div v-else-if="characters.length > 0">
       <ul>
         <!-- Wrap the entire li in router-link to make the whole card clickable -->
         <router-link 
-          v-for="weapon in weapons" 
-          :key="weapon.id" 
-          :to="'/weapon/' + weapon.id" 
-          class="weapon-item-link"
+          v-for="character in characters" 
+          :key="character.id" 
+          :to="'/character/' + character.id" 
+          class="character-item-link"
         >
-          <li class="weapon-item">
-            <!-- Weapon content -->
-            <h3>{{ weapon.name }}</h3>
-            <p>{{ weapon.description }}</p>
+          <li class="character-item">
+            <!-- Character content -->
+            <h3>{{ character.name }}</h3>
+            <p>{{ character.description }}</p>
           </li>
         </router-link>
       </ul>
     </div>
 
     <div v-else>
-      <p>No weapons found for this movie.</p>
+      <p>No characters found for this movie.</p>
     </div>
   </div>
-
 </template>
 
 <script>
-import defineComponent from './moviedetail.js';
+import defineComponent from './mediadetail.js';
 
 export default {
   ...defineComponent,
@@ -68,21 +67,19 @@ li {
   transition: transform 0.3s ease; /* Smooth transition for the hover effect */
 }
 
-/* Hover effect for the weapon card */
-.weapon-item:hover {
+/* Hover effect for the character card */
+.character-item:hover {
   transform: translateY(-5px); /* Move the item upwards on hover */
 }
 
 /* Styling for router-link around the whole list item */
-.weapon-item-link {
+.character-item-link {
   text-decoration: none; /* Remove the default link underline */
   display: block; /* Ensure the entire li is clickable */
   color: inherit; /* Use the default color */
 }
 
-
-
-.weapon-placeholder {
+.character-placeholder {
   background-color: #f4f4f4;
   padding: 10px;
   margin-bottom: 10px;
@@ -90,14 +87,14 @@ li {
   animation: pulse 1.5s infinite ease-in-out;
 }
 
-.weapon-placeholder-name {
+.character-placeholder-name {
   height: 20px;
   background-color: #ddd;
   width: 80%;
   margin-bottom: 10px;
 }
 
-.weapon-placeholder-description {
+.character-placeholder-description {
   height: 15px;
   background-color: #ddd;
   width: 90%;
