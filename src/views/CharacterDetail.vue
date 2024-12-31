@@ -1,9 +1,7 @@
 <template>
   <div v-if="character" class="character-details">
     <div class="character-card">
-    
-      <img :src="defaultImage" alt="Character Image" class="character-image" />
-
+      <img :src=" defaultImage" alt="Character Image" class="character-image" />
       <div class="character-info">
         <h1>{{ character.character }}</h1>
         <p><strong>Difficulty:</strong> {{ character.difficulty }}</p>
@@ -11,10 +9,13 @@
         <div class="key-items">
           <div 
             v-for="item in character.key_items" 
-            :key="item" 
+            :key="item.item" 
             class="key-item-card"
           >
-            <p>{{ item }}</p>
+            <a :href="item.affiliate_link" target="_blank" @click.prevent="logItem(item)">
+              <img :src="getRandomImage()" :alt="item.item" class="key-item-image" />
+             <p class="key-item-title">{{ item.item || 'Placeholder Title' }}</p> <!-- Fallback for missing title -->
+            </a>
           </div>
         </div>
       </div>
@@ -24,6 +25,9 @@
     <p>Loading character details...</p>
   </div>
 </template>
+
+
+
 
 
 <script>
@@ -42,6 +46,36 @@ export default {
   padding: 20px;
   background-color: #f9f9f9;
   min-height: 100vh;
+}
+.item-title {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+  color: #333;
+}
+
+.key-item-image {
+  width: 80px; /* Adjust size to fit design */
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.key-item-card {
+  text-align: center;
+  padding: 10px;
+}
+.key-item-card p {
+  font-size: 14px;
+  font-weight: bold;
+}
+.key-item-title {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-top: 5px;
 }
 
 .character-card {
