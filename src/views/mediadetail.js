@@ -1,8 +1,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { generateClient } from 'aws-amplify/data';
 import { useRoute } from 'vue-router';
-import { fetchAllPaginatedData } from '../shared.js'; // Adjust the path as needed
-
+import defaultImage from '@/assets/images/ranger.jpg'; 
 export default defineComponent({
   name: 'MediaDetail',
   setup() {
@@ -35,6 +34,7 @@ export default defineComponent({
               id: recommendation.id, // Ensure each character has a unique ID
               name: recommendation.character,
               description: recommendation.description || '', // Add a description if available
+              image: recommendation.image_url || defaultImage, // Example property name
             });
           }
         }

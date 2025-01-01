@@ -13,7 +13,7 @@
 
     <div v-else-if="characters.length > 0">
       <ul>
-        <!-- Wrap the entire li in router-link to make the whole card clickable -->
+        <!-- The entire li is wrapped in router-link so it's clickable -->
         <router-link 
           v-for="character in characters" 
           :key="character.id" 
@@ -21,9 +21,20 @@
           class="character-item-link"
         >
           <li class="character-item">
-            <!-- Character content -->
-            <h3>{{ character.name }}</h3>
+
+            <!-- Character image next to the name -->
+            <div class="character-header">
+              <img
+                v-if="character.image"
+                :src="character.image"
+                :alt="character.name"
+                class="character-thumbnail"
+              />
+              <h3>{{ character.name }}</h3>
+            </div>
+
             <p>{{ character.description }}</p>
+
           </li>
         </router-link>
       </ul>
@@ -110,5 +121,19 @@ li {
   100% {
     opacity: 0.8;
   }
+}
+
+.character-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* some spacing around the header */
+}
+
+.character-thumbnail {
+  width: 40px;          /* Adjust to your preferred size */
+  height: 40px;         /* Adjust to your preferred size */
+  object-fit: cover;    /* Crops the image to fit the container */
+  border-radius: 50%;   /* Makes the image circular; remove if you want a square */
+  margin-right: 10px;   /* Spacing between image and the character name */
 }
 </style>
