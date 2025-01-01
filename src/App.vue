@@ -3,7 +3,6 @@
     <nav>
       <router-link to="/" class="nav-link">Home</router-link>
       <router-link to="/movies" class="nav-link">Movies/Series</router-link>
-      <router-link to="/game" class="nav-link">Video Games</router-link>
     </nav>
 
     <div class="content">

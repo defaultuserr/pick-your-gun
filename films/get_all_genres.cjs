@@ -68,11 +68,3 @@ movie_list =  getUniqueGenres("movie").catch(error => {
     console.error('Error processing movies and weapons:', error);
   });
 
-
-   // createGenre(client.models.MovieGenre, item)
-      
-  
-
-//game = getUniqueGenres("game").catch(error => {
- //   console.error('Error processing movies and weapons:', error);
-  //});
