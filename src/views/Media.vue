@@ -2,32 +2,30 @@
   <div>
     <h1>Movies List</h1>
 
-   <div class="filter-bar">
-
-
-
+    <div class="filter-bar">
       <!-- Media Type Filter -->
-      <label for="media-type-filter" class="media-filter-label">Filter by Media Type:</label>
-     <select id="media-type-filter" v-model="selectedMediaType" @change="fetchMovies">
-  <option value="">All</option>
-  <option v-for="type in mediaTypes" :key="type" :value="type">
-    {{ type }}
-  </option>
-</select>
+      <div class="filter-group">
+        <label for="media-type-filter" class="media-filter-label">Filter by Media Type:</label>
+        <select id="media-type-filter" v-model="selectedMediaType" @change="fetchMovies">
+          <option value="">All</option>
+          <option v-for="type in mediaTypes" :key="type" :value="type">
+            {{ type }}
+          </option>
+        </select>
+      </div>
 
+      <!-- Genre Filter -->
+      <div class="filter-group">
+        <label for="genre-filter">Filter by Genre:</label>
+        <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
+          <option value="">All</option>
+          <option v-for="genre in genres" :key="genre" :value="genre">
+            {{ genre }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-    <label for="genre-filter">Filter by Genre:</label>
-    <select id="genre-filter" v-model="selectedGenre" @change="fetchMovies">
-      <option value="">All</option> <!-- Default option -->
-      <option v-for="genre in genres" :key="genre" :value="genre">
-        {{ genre }}
-      </option>
-    </select>
-
-  </div>
-
-
-  
     <div class="movie-list">
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <div class="movie-card-content">
@@ -57,6 +55,34 @@ h1 {
   color: #333;
 }
 
+/* === Filter Bar Styling === */
+.filter-bar {
+  /* Center all filter groups horizontally */
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* space between the two filter groups */
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  /* Keep label and select together */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make the selects a fixed size */
+.filter-bar select {
+  width: 150px;      /* fixed width */
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.filter-bar label {
+  font-size: 16px;
+}
+
+/* === Movie List Styling === */
 .movie-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -88,22 +114,8 @@ h1 {
   color: #666;
 }
 
-.filter-bar {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.filter-bar label {
-  margin-right: 10px;
-  font-size: 16px;
-}
-
-.filter-bar select {
-  padding: 5px 10px;
-  font-size: 16px;
-}
-
 .media-filter-label {
-  margin-left: 20px;
+  /* Just an example if you need a left margin. Adjust or remove as needed. */
+  margin-left: 0;
 }
 </style>

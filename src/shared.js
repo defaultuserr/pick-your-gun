@@ -42,8 +42,5 @@ export const sharedMethods = {
     // Alternatively, path: ({identityId}) => `album/{identityId}/1.jpg`
   });
   
-  console.log(typeof linkToStorageFile.url)
-  console.log('signed URL: ', linkToStorageFile.url.href);
-
   return linkToStorageFile.url.href;
 }

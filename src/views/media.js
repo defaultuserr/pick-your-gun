@@ -8,7 +8,7 @@ export default defineComponent({
     const client = generateClient();
     const movies = ref([]);
     const genres = ref([]); // Holds the dynamic genres list
-    const mediaTypes = ref(['Movies', 'Videogames']); // Static media types
+    const mediaTypes = ref(['Movies', 'Videogames', 'Series']); // Static media types
     const selectedGenre = ref('');
     const selectedMediaType = ref(''); // State for media type filtering
 
@@ -18,7 +18,7 @@ export default defineComponent({
 
         // Apply genre filter
         if (selectedGenre.value) {
-          filter.genre_search = { contains: selectedGenre.value.toLowerCase() }; // Filter by genre
+          filter.genre_lowercase = { contains: selectedGenre.value.toLowerCase() }; // Filter by genre
         }
 
         // Determine the media type for filtering
@@ -66,21 +66,38 @@ export default defineComponent({
         let genreModel = '';
         switch (selectedMediaType.value) {
           case 'Movies':
-            genreModel = 'MovieGenre';
+            genreModel = 'movie';
             break;
           case 'Videogames':
-            genreModel = 'GameGenre';
+            genreModel = 'game';
             break;
+          case 'Series':
+            genreModel = 'series'; 
           default:
             genres.value = [];
             return;
         }
+        console.log("type in string")
+    
+        const genresList = await client.models.Genre.list({
+          filter: {
+            type: {
+              eq: genreModel
+            }
+          },   
+          selectionSet: ['genre'],
+  
+        });
 
-        const genresList = await client.models[genreModel].list();
-        const cleanedGenres = genresList.data.map((item) => item.genre);
-        genres.value = cleanedGenres;
 
-        console.log('Fetched genres:', cleanedGenres);
+        
+        // get all unique genres TODO
+        console.log(genresList.data)
+        let justGenres = genresList.data.map(item => item.genre);
+        console.log('Fetched genres:', justGenres);
+        genres.value = justGenres;
+
+      
       } catch (error) {
         console.error('Error fetching genres:', error);
       }

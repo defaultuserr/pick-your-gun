@@ -15,6 +15,7 @@ const schema = a.schema({
     type: a.string().required(), // "movie", "game", or "series"
     title: a.string().required(),
     genre: a.string(), // e.g., "Fantasy", "Adventure"
+    genre_lowercase: a.string(), // e.g., "Fantasy", "Adventure"
     release_year: a.integer(),
     cosplay_recommendations: a.hasMany('CosplayRecommendation', 'mediaId'), // One-to-many relationship
   })
@@ -31,6 +32,16 @@ const schema = a.schema({
     image_url: a.string(), // URL for character image
     media: a.belongsTo('Media', 'mediaId'), // One-to-one relationship
   })
+  .authorization((allow) => [allow.publicApiKey()]),
+
+  Genre: a
+  .model({
+    id: a.id().required(),
+    type: a.string().required(), // "movie", "game", or "series"
+    genre_lowercase: a.string().required(),
+    genre: a.string().required(),
+  })
+  .secondaryIndexes((index) => [index('genre')]) // Index for title for better search performance
   .authorization((allow) => [allow.publicApiKey()]),
 
 });

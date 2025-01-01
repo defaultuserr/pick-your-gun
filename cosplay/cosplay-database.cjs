@@ -83,6 +83,7 @@ const { errors: errors, data: newMedia } = await client.models.Media.create({
     type: media.type,  // Include type attribute
     title: media.title,
     genre: media.genre,
+    genre_lowercase: String(media.genre).toLowerCase(),
     release_year: Number(media.release_year),
 });
 

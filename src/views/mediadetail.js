@@ -31,7 +31,7 @@ export default defineComponent({
 
           // Populate characters array with fetched data
           for (const recommendation of recommendations) {
-            console.log(`Character: ${recommendation.character}`);
+          
             characters.value.push({
               id: recommendation.id, // Ensure each character has a unique ID
               name: recommendation.character,
@@ -46,8 +46,7 @@ export default defineComponent({
         isLoadingCharacters.value = false; // Loading complete
       }
     };
-    console.log("chracters");
-    console.log(characters.value)
+ 
     onMounted(fetchMediaDetails);
 
 
