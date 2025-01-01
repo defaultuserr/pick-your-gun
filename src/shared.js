@@ -1,3 +1,5 @@
+import { getUrl } from 'aws-amplify/storage';
+
 export const sharedMethods = {
     greetGlobal() {
       console.log("Hello from a shared method!");
@@ -33,3 +35,15 @@ export const sharedMethods = {
   
     return allData;
   };
+
+  export const getPresignedUrl = async (file_path) => {
+  const linkToStorageFile = await getUrl({
+    path: file_path,
+    // Alternatively, path: ({identityId}) => `album/{identityId}/1.jpg`
+  });
+  
+  console.log(typeof linkToStorageFile.url)
+  console.log('signed URL: ', linkToStorageFile.url.href);
+
+  return linkToStorageFile.url.href;
+}

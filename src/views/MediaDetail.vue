@@ -25,8 +25,8 @@
             <!-- Character image next to the name -->
             <div class="character-header">
               <img
-                v-if="character.image"
-                :src="character.image"
+                v-if="character.image_url"
+                :src="character.image_url"
                 :alt="character.name"
                 class="character-thumbnail"
               />

@@ -2,6 +2,8 @@ import { defineComponent, ref, onMounted } from 'vue';
 import { generateClient } from 'aws-amplify/data';
 import { useRoute } from 'vue-router';
 import defaultImage from '@/assets/images/ranger.jpg'; 
+
+import { getPresignedUrl } from '../shared.js';
 export default defineComponent({
   name: 'MediaDetail',
   setup() {
@@ -25,7 +27,7 @@ export default defineComponent({
 
           // Fetch related cosplay recommendations
           const { data: recommendations } = await mediaData.cosplay_recommendations();
-          console.log('Fetched recommendations:', recommendations);
+        
 
           // Populate characters array with fetched data
           for (const recommendation of recommendations) {
@@ -34,7 +36,7 @@ export default defineComponent({
               id: recommendation.id, // Ensure each character has a unique ID
               name: recommendation.character,
               description: recommendation.description || '', // Add a description if available
-              image: recommendation.image_url || defaultImage, // Example property name
+              image_url: await getPresignedUrl(recommendation.image_url) || "no url found", // Example property name
             });
           }
         }
@@ -44,9 +46,12 @@ export default defineComponent({
         isLoadingCharacters.value = false; // Loading complete
       }
     };
-
+    console.log("chracters");
+    console.log(characters.value)
     onMounted(fetchMediaDetails);
 
+
+    
     return {
       movie,
       characters,
