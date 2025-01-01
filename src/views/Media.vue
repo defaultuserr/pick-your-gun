@@ -32,7 +32,7 @@
     <div v-if="isInitialLoad" class="loading-indicator">
       <p>Loading initial data, please wait...</p>
       <div
-        v-for="placeholderIndex in 6"
+        v-for="placeholderIndex in 3"
         :key="placeholderIndex"
         class="movie-card skeleton-card"
       >
