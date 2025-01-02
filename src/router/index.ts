@@ -4,7 +4,7 @@ import Home from '../views/Home.vue';
 import Movies from '../views/Media.vue';  // Import Movies View
 import CharacterDetail from '../views/CharacterDetail.vue'; // Import Character Details View
 import MediaDetail from '../views/MediaDetail.vue';
-
+import SignIn from "../views/signin/signin.vue"
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'Home', component: Home },
@@ -15,6 +15,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CharacterDetail',
     component: CharacterDetail, 
   },
+  { path: '/sign-in', component: SignIn },
+  
 ];
 
 const router = createRouter({
