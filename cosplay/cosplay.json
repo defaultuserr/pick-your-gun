@@ -1,0 +1,210 @@
+{
+  "media": [
+    {
+      "type": "movie",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "genre": ["Fantasy", "Adventure"],
+      "release_year": 2001,
+      "cosplay_recommendations": [
+        {
+          "character": "Aragorn",
+          "difficulty": "Medium",
+          "key_items": [
+            {"item": "Sword", "affiliate_link": "https://example.com/affiliate/sword", "image_url": "https://example.com/images/items/sword.jpg"},
+            {"item": "Ranger cloak", "affiliate_link": "https://example.com/affiliate/ranger-cloak", "image_url": "https://example.com/images/items/ranger-cloak.jpg"},
+            {"item": "Leather armor", "affiliate_link": "https://example.com/affiliate/leather-armor", "image_url": "https://example.com/images/items/leather-armor.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Necklace of the Evenstar", "affiliate_link": "https://example.com/affiliate/necklace-evenstar", "image_url": "https://example.com/images/items/necklace-evenstar.jpg"},
+            {"item": "Brown leather gloves", "affiliate_link": "https://example.com/affiliate/leather-gloves", "image_url": "https://example.com/images/items/leather-gloves.jpg"},
+            {"item": "Scabbard", "affiliate_link": "https://example.com/affiliate/scabbard", "image_url": "https://example.com/images/items/scabbard.jpg"},
+            {"item": "Utility belt", "affiliate_link": "https://example.com/affiliate/utility-belt", "image_url": "https://example.com/images/items/utility-belt.jpg"}
+          ],
+          "image_url": "images/examples/ranger.jpg"
+        },
+        {
+          "character": "Gandalf",
+          "difficulty": "Hard",
+          "key_items": [
+            {"item": "Wizard hat", "affiliate_link": "https://example.com/affiliate/wizard-hat", "image_url": "https://example.com/images/items/wizard-hat.jpg"},
+            {"item": "Staff", "affiliate_link": "https://example.com/affiliate/staff", "image_url": "https://example.com/images/items/staff.jpg"},
+            {"item": "Grey robe", "affiliate_link": "https://example.com/affiliate/grey-robe", "image_url": "https://example.com/images/items/grey-robe.jpg"},
+            {"item": "Pipe", "affiliate_link": "https://example.com/affiliate/pipe", "image_url": "https://example.com/images/items/pipe.jpg"},
+            {"item": "Belt with pouch", "affiliate_link": "https://example.com/affiliate/belt-pouch", "image_url": "https://example.com/images/items/belt-pouch.jpg"},
+            {"item": "Brown leather boots", "affiliate_link": "https://example.com/affiliate/leather-boots", "image_url": "https://example.com/images/items/leather-boots.jpg"},
+            {"item": "White hair wig", "affiliate_link": "https://example.com/affiliate/white-hair-wig", "image_url": "https://example.com/images/items/white-hair-wig.jpg"},
+            {"item": "Beard set", "affiliate_link": "https://example.com/affiliate/beard-set", "image_url": "https://example.com/images/items/beard-set.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        },
+        {
+          "character": "Frodo Baggins",
+          "difficulty": "Easy",
+          "key_items": [
+            {"item": "Ring", "affiliate_link": "https://example.com/affiliate/ring", "image_url": "https://example.com/images/items/ring.jpg"},
+            {"item": "Hobbit feet", "affiliate_link": "https://example.com/affiliate/hobbit-feet", "image_url": "https://example.com/images/items/hobbit-feet.jpg"},
+            {"item": "Travel cloak", "affiliate_link": "https://example.com/affiliate/travel-cloak", "image_url": "https://example.com/images/items/travel-cloak.jpg"},
+            {"item": "Short sword", "affiliate_link": "https://example.com/affiliate/short-sword", "image_url": "https://example.com/images/items/short-sword.jpg"},
+            {"item": "Backpack", "affiliate_link": "https://example.com/affiliate/backpack", "image_url": "https://example.com/images/items/backpack.jpg"},
+            {"item": "Brown vest", "affiliate_link": "https://example.com/affiliate/brown-vest", "image_url": "https://example.com/images/items/brown-vest.jpg"},
+            {"item": "White shirt", "affiliate_link": "https://example.com/affiliate/white-shirt", "image_url": "https://example.com/images/items/white-shirt.jpg"},
+            {"item": "Curly brown wig", "affiliate_link": "https://example.com/affiliate/curly-brown-wig", "image_url": "https://example.com/images/items/curly-brown-wig.jpg"}
+          ],
+          "image_url": "images/examples/ranger.jpg"
+        }
+      ]
+    },
+    {
+      "type": "game",
+      "title": "The Legend of Zelda: Breath of the Wild",
+      "genre": ["Adventure", "Fantasy"],
+      "release_year": 2017,
+      "cosplay_recommendations": [
+        {
+          "character": "Link",
+          "difficulty": "Medium",
+          "key_items": [
+            {"item": "Master Sword", "affiliate_link": "https://example.com/affiliate/master-sword", "image_url": "https://example.com/images/items/master-sword.jpg"},
+            {"item": "Hylian Shield", "affiliate_link": "https://example.com/affiliate/hylian-shield", "image_url": "https://example.com/images/items/hylian-shield.jpg"},
+            {"item": "Blue Champion Tunic", "affiliate_link": "https://example.com/affiliate/blue-champion-tunic", "image_url": "https://example.com/images/items/blue-champion-tunic.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Sheikah Slate", "affiliate_link": "https://example.com/affiliate/sheikah-slate", "image_url": "https://example.com/images/items/sheikah-slate.jpg"},
+            {"item": "Leather gloves", "affiliate_link": "https://example.com/affiliate/leather-gloves", "image_url": "https://example.com/images/items/leather-gloves.jpg"},
+            {"item": "Quiver with arrows", "affiliate_link": "https://example.com/affiliate/quiver-arrows", "image_url": "https://example.com/images/items/quiver-arrows.jpg"},
+            {"item": "Hair wig with side bangs", "affiliate_link": "https://example.com/affiliate/hair-wig", "image_url": "https://example.com/images/items/hair-wig.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        },
+        {
+          "character": "Zelda",
+          "difficulty": "Hard",
+          "key_items": [
+            {"item": "Hylian royal dress", "affiliate_link": "https://example.com/affiliate/hylian-royal-dress", "image_url": "https://example.com/images/items/hylian-royal-dress.jpg"},
+            {"item": "Golden tiara", "affiliate_link": "https://example.com/affiliate/golden-tiara", "image_url": "https://example.com/images/items/golden-tiara.jpg"},
+            {"item": "Earrings", "affiliate_link": "https://example.com/affiliate/earrings", "image_url": "https://example.com/images/items/earrings.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Book", "affiliate_link": "https://example.com/affiliate/book", "image_url": "https://example.com/images/items/book.jpg"},
+            {"item": "Golden belt", "affiliate_link": "https://example.com/affiliate/golden-belt", "image_url": "https://example.com/images/items/golden-belt.jpg"},
+            {"item": "Decorative brooch", "affiliate_link": "https://example.com/affiliate/decorative-brooch", "image_url": "https://example.com/images/items/decorative-brooch.jpg"},
+            {"item": "Blonde wig with curls", "affiliate_link": "https://example.com/affiliate/blonde-wig", "image_url": "https://example.com/images/items/blonde-wig.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        },
+        {
+          "character": "Revali",
+          "difficulty": "Expert",
+          "key_items": [
+            {"item": "Rito feathers", "affiliate_link": "https://example.com/affiliate/rito-feathers", "image_url": "https://example.com/images/items/rito-feathers.jpg"},
+            {"item": "Bow", "affiliate_link": "https://example.com/affiliate/bow", "image_url": "https://example.com/images/items/bow.jpg"},
+            {"item": "Armor", "affiliate_link": "https://example.com/affiliate/armor", "image_url": "https://example.com/images/items/armor.jpg"},
+            {"item": "Headdress", "affiliate_link": "https://example.com/affiliate/headdress", "image_url": "https://example.com/images/items/headdress.jpg"},
+            {"item": "Wing accessories", "affiliate_link": "https://example.com/affiliate/wing-accessories", "image_url": "https://example.com/images/items/wing-accessories.jpg"},
+            {"item": "Feathered tail", "affiliate_link": "https://example.com/affiliate/feathered-tail", "image_url": "https://example.com/images/items/feathered-tail.jpg"},
+            {"item": "Talons for hands and feet", "affiliate_link": "https://example.com/affiliate/talons", "image_url": "https://example.com/images/items/talons.jpg"}
+          ],
+          "image_url": "images/examples/ranger.jpg"
+        }
+      ]
+    },
+    {
+      "type": "movie",
+      "title": "Spider-Man: No Way Home",
+      "genre": ["Action", "Superhero"],
+      "release_year": 2021,
+      "cosplay_recommendations": [
+        {
+          "character": "Spider-Man (Tom Holland)",
+          "difficulty": "Medium",
+          "key_items": [
+            {"item": "Spider-Man suit", "affiliate_link": "https://example.com/affiliate/spiderman-suit", "image_url": "https://example.com/images/items/spiderman-suit.jpg"},
+            {"item": "Web-shooters", "affiliate_link": "https://example.com/affiliate/web-shooters", "image_url": "https://example.com/images/items/web-shooters.jpg"},
+            {"item": "Mask", "affiliate_link": "https://example.com/affiliate/mask", "image_url": "https://example.com/images/items/mask.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Utility belt", "affiliate_link": "https://example.com/affiliate/utility-belt", "image_url": "https://example.com/images/items/utility-belt.jpg"},
+            {"item": "Red and blue fabric gloves", "affiliate_link": "https://example.com/affiliate/fabric-gloves", "image_url": "https://example.com/images/items/fabric-gloves.jpg"},
+            {"item": "Backpack for casual scenes", "affiliate_link": "https://example.com/affiliate/backpack", "image_url": "https://example.com/images/items/backpack.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        },
+        {
+          "character": "Doctor Strange",
+          "difficulty": "Hard",
+          "key_items": [
+            {"item": "Cloak of Levitation", "affiliate_link": "https://example.com/affiliate/cloak-of-levitation", "image_url": "https://example.com/images/items/cloak-of-levitation.jpg"},
+            {"item": "Eye of Agamotto", "affiliate_link": "https://example.com/affiliate/eye-of-agamotto", "image_url": "https://example.com/images/items/eye-of-agamotto.jpg"},
+            {"item": "Spell book", "affiliate_link": "https://example.com/affiliate/spell-book", "image_url": "https://example.com/images/items/spell-book.jpg"},
+            {"item": "Ring", "affiliate_link": "https://example.com/affiliate/ring", "image_url": "https://example.com/images/items/ring.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Blue tunic with red detailing", "affiliate_link": "https://example.com/affiliate/blue-tunic", "image_url": "https://example.com/images/items/blue-tunic.jpg"},
+            {"item": "Brown belt with pouches", "affiliate_link": "https://example.com/affiliate/brown-belt", "image_url": "https://example.com/images/items/brown-belt.jpg"},
+            {"item": "Grey streak wig", "affiliate_link": "https://example.com/affiliate/grey-streak-wig", "image_url": "https://example.com/images/items/grey-streak-wig.jpg"}
+          ],
+          "image_url": "images/examples/ranger.jpg"
+        },
+        {
+          "character": "Green Goblin",
+          "difficulty": "Expert",
+          "key_items": [
+            {"item": "Glider prop", "affiliate_link": "https://example.com/affiliate/glider-prop", "image_url": "https://example.com/images/items/glider-prop.jpg"},
+            {"item": "Pumpkin bombs", "affiliate_link": "https://example.com/affiliate/pumpkin-bombs", "image_url": "https://example.com/images/items/pumpkin-bombs.jpg"},
+            {"item": "Green armor", "affiliate_link": "https://example.com/affiliate/green-armor", "image_url": "https://example.com/images/items/green-armor.jpg"},
+            {"item": "Helmet", "affiliate_link": "https://example.com/affiliate/helmet", "image_url": "https://example.com/images/items/helmet.jpg"},
+            {"item": "Boots", "affiliate_link": "https://example.com/affiliate/boots", "image_url": "https://example.com/images/items/boots.jpg"},
+            {"item": "Purple hood", "affiliate_link": "https://example.com/affiliate/purple-hood", "image_url": "https://example.com/images/items/purple-hood.jpg"},
+            {"item": "Utility satchel", "affiliate_link": "https://example.com/affiliate/utility-satchel", "image_url": "https://example.com/images/items/utility-satchel.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        }
+      ]
+    },
+    {
+      "type": "series",
+      "title": "Stranger Things",
+      "genre": ["Horror", "Drama", "Science Fiction"],
+      "release_year": 2016,
+      "cosplay_recommendations": [
+        {
+          "character": "Eleven",
+          "difficulty": "Easy",
+          "key_items": [
+            {"item": "Pink dress", "affiliate_link": "https://example.com/affiliate/pink-dress", "image_url": "https://example.com/images/items/pink-dress.jpg"},
+            {"item": "Waffle prop", "affiliate_link": "https://example.com/affiliate/waffle-prop", "image_url": "https://example.com/images/items/waffle-prop.jpg"},
+            {"item": "Short blonde wig", "affiliate_link": "https://example.com/affiliate/short-blonde-wig", "image_url": "https://example.com/images/items/short-blonde-wig.jpg"},
+            {"item": "Bloody nose makeup", "affiliate_link": "https://example.com/affiliate/bloody-nose-makeup", "image_url": "https://example.com/images/items/bloody-nose-makeup.jpg"},
+            {"item": "Jacket", "affiliate_link": "https://example.com/affiliate/jacket", "image_url": "https://example.com/images/items/jacket.jpg"},
+            {"item": "White sneakers", "affiliate_link": "https://example.com/affiliate/white-sneakers", "image_url": "https://example.com/images/items/white-sneakers.jpg"},
+            {"item": "Blue socks", "affiliate_link": "https://example.com/affiliate/blue-socks", "image_url": "https://example.com/images/items/blue-socks.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        },
+        {
+          "character": "Jim Hopper",
+          "difficulty": "Medium",
+          "key_items": [
+            {"item": "Sheriff's hat", "affiliate_link": "https://example.com/affiliate/sheriff-hat", "image_url": "https://example.com/images/items/sheriff-hat.jpg"},
+            {"item": "Badge", "affiliate_link": "https://example.com/affiliate/badge", "image_url": "https://example.com/images/items/badge.jpg"},
+            {"item": "Flannel shirt", "affiliate_link": "https://example.com/affiliate/flannel-shirt", "image_url": "https://example.com/images/items/flannel-shirt.jpg"},
+            {"item": "Pants", "affiliate_link": "https://example.com/affiliate/pants", "image_url": "https://example.com/images/items/pants.jpg"},
+            {"item": "Belt with holster", "affiliate_link": "https://example.com/affiliate/belt-holster", "image_url": "https://example.com/images/items/belt-holster.jpg"},
+            {"item": "Brown boots", "affiliate_link": "https://example.com/affiliate/brown-boots", "image_url": "https://example.com/images/items/brown-boots.jpg"},
+            {"item": "Police radio", "affiliate_link": "https://example.com/affiliate/police-radio", "image_url": "https://example.com/images/items/police-radio.jpg"}
+          ],
+          "image_url": "images/examples/ranger.jpg"
+        },
+        {
+          "character": "Demogorgon",
+          "difficulty": "Expert",
+          "key_items": [
+            {"item": "Full-body monster suit", "affiliate_link": "https://example.com/affiliate/monster-suit", "image_url": "https://example.com/images/items/monster-suit.jpg"},
+            {"item": "Face petals", "affiliate_link": "https://example.com/affiliate/face-petals", "image_url": "https://example.com/images/items/face-petals.jpg"},
+            {"item": "Claws", "affiliate_link": "https://example.com/affiliate/claws", "image_url": "https://example.com/images/items/claws.jpg"},
+            {"item": "Dark fabric for shading", "affiliate_link": "https://example.com/affiliate/dark-fabric", "image_url": "https://example.com/images/items/dark-fabric.jpg"},
+            {"item": "Spikes", "affiliate_link": "https://example.com/affiliate/spikes", "image_url": "https://example.com/images/items/spikes.jpg"},
+            {"item": "Large teeth attachments", "affiliate_link": "https://example.com/affiliate/teeth-attachments", "image_url": "https://example.com/images/items/teeth-attachments.jpg"},
+            {"item": "Red-tinted fabric for inside petals", "affiliate_link": "https://example.com/affiliate/red-fabric", "image_url": "https://example.com/images/items/red-fabric.jpg"}
+          ],
+          "image_url": "images/examples/wizard.jpg"
+        }
+      ]
+    }
+  ]
+}

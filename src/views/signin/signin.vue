@@ -3,7 +3,7 @@
     <template v-slot="{ user, signOut }">
       <div class="user-profile">
         <!-- Display current username -->
-        <h1>Hello {{ user.username || 'User' }}!</h1>
+        <h1>Hello {{ newUsername }}!</h1>
 
         <!-- Edit box for changing the username -->
         <div class="edit-username">
@@ -12,7 +12,7 @@
             id="username"
             type="text"
             v-model="newUsername"
-            :placeholder=user.username
+            :placeholder=newUsername
           />
           <button @click="updateUsername">Update Username</button>
         </div>
@@ -28,6 +28,21 @@
 </template>
 
 <script>import '@aws-amplify/ui-vue/styles.css';
+
+import { generateRandomUsername} from '../../shared.js';
+export default {
+  data() {
+    return {
+      newUsername: '', // Prefilled random username
+      message: '', // Feedback message
+    };
+  },
+  async mounted() {
+    // Generate a random username when the site loads
+    this.newUsername = await generateRandomUsername();
+  },
+
+};
 </script>
 
 

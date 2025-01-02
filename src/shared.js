@@ -10,6 +10,55 @@ export const sharedMethods = {
     sharedMessage: "This is shared data.",
   };
   
+
+// Function to fetch JSON data from a URL
+async function fetchJSON(filePath) {
+  try {
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`Error fetching JSON from ${filePath}:`, error);
+    return null;
+  }
+}
+
+// Function to generate a random username
+export async function generateRandomUsername() {
+  try {
+    // Update the paths to point to your public folder or server endpoints
+    const adjectivesPath = '../random_name/funny_adjectives.json';
+    const scientistsPath = '../random_name/scientists.json';
+
+    // Fetch adjectives and scientists
+    const adjectivesData = await fetchJSON(adjectivesPath);
+    const scientistsData = await fetchJSON(scientistsPath);
+
+    if (!adjectivesData || !scientistsData) {
+      return 'Default_User'; // Fallback username
+    }
+
+    const adjectives = adjectivesData.adjectives;
+    const scientists = scientistsData.scientists;
+
+    // Pick random elements
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomScientist = scientists[Math.floor(Math.random() * scientists.length)];
+
+    // Combine into a username
+    return `${randomAdjective}_${randomScientist}`;
+  } catch (error) {
+    console.error('Error generating random username:', error);
+    return 'Default_User'; // Fallback username
+  }
+}
+
+
+
+
+
   export const fetchAllPaginatedData = async (client, modelName, filter = {}) => {
     let allData = [];
     let nextToken = null;
