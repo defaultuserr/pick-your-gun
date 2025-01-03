@@ -1,7 +1,7 @@
 import { generateRandomUsername} from '../../shared.js';
 import { defineComponent, ref } from 'vue';
 import { fetchUserAttributes, updateUserAttribute } from 'aws-amplify/auth';
-import { VTextField, VContainer, VRow, VCol, VSnackbar, VBtn } from 'vuetify/components';
+import { VTextField, VContainer, VRow, VCol, VSnackbar, VBtn, VProgressCircular  } from 'vuetify/components';
 export default  defineComponent({
   components: {
     VBtn,
@@ -10,12 +10,14 @@ export default  defineComponent({
     VRow,
     VCol,
     VSnackbar,
+    VProgressCircular 
   },
   setup () {
     const newUsername = ref('');
     const feedbackMessage = ref('');
     const snackbarVisible = ref(false); // Snackbar visibility
     const isError = ref(false);
+    const isLoading = ref(true);
     const updateUsername = async () => {
       if (!rules.required(newUsername.value)) {
         feedbackMessage.value = "The username field cannot be empty. Please enter a valid username.";
@@ -55,21 +57,36 @@ export default  defineComponent({
     const rules = {
       required: (value) => !!value.trim() || 'This field is required.',
     };
+
+    const loadUserData = async () => {
+      try {
+        const user_attr = await fetchUserAttributes();
+        newUsername.value = user_attr.nickname || await generateRandomUsername();
+      } catch (error) {
+        console.error('Error fetching user attributes:', error);
+      } finally {
+        console.log("User data loaded successfully.")
+        isLoading.value = false; // Set loading to false once data fetching is complete
+      }
+    };
+
+
+    loadUserData();
+
+
     return {
       rules,
       updateUsername, 
       snackbarVisible,
       feedbackMessage,
       isError,
-      newUsername
+      newUsername,
+      isLoading
    
     }
   },
  
-  async mounted() {
-    // Generate a random username when the site loads
-    this.newUsername = await generateRandomUsername();
-  },
+ 
  
 
 });

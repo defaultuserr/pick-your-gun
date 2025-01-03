@@ -1,6 +1,6 @@
 import { getCurrentUser } from 'aws-amplify/auth';
 import { useRouter } from 'vue-router';
-
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 export default {
   name: 'App',
@@ -20,11 +20,12 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      username: "",
+      username: "", 
+      isLoading: true,
     };
   },
   async created() {
-
+this.isLoading = true;
     
     try {
       console.log("Checking user login state...");
@@ -37,19 +38,27 @@ export default {
         }
     
       }
+    let user_attr = await fetchUserAttributes();
+    if (user) {
+      this.isLoggedIn = true;
+    }
+    else {
+      console.log("No user is signed in.");
+      this.isLoggedIn = false;
+      return;
+    }
 
-      console.log(user)
-      console.log("start if")
-      if (user && user.username) {
-        this.isLoggedIn = true;
+      if ( user_attr.nickname) {
+        this.username = user_attr.nickname
+        
+      }else{
         this.username = user.username;
-      } else {
-        console.log("No user is signed in.");
-        this.isLoggedIn = false;
-      }
+      } 
     } catch (error) {
       console.error("Error checking user login state:", error);
       this.isLoggedIn = false;
+    } finally {
+      this.isLoading = false;
     }
   },
   methods: {

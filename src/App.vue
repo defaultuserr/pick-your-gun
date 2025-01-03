@@ -6,7 +6,10 @@
         <router-link to="/movies" class="nav-link">Movies/Series</router-link>
       </div>
       <div class="auth-section">
-        <template v-if="isLoggedIn">
+        <template v-if="isLoading">
+          <span>Loading...</span> <!-- Show a loading indicator -->
+        </template>
+        <template v-else-if="isLoggedIn">
           Welcome, <span class="nickname">{{ username }}</span>!
         </template>
         <template v-else>
@@ -20,6 +23,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import defineComponent from './app.js';
