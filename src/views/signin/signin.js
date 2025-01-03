@@ -1,7 +1,9 @@
 import { generateRandomUsername} from '../../shared.js';
 import { defineComponent, ref } from 'vue';
-import { fetchUserAttributes, updateUserAttribute } from 'aws-amplify/auth';
+import { fetchUserAttributes, updateUserAttribute, signOut } from 'aws-amplify/auth';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue';
 import { VTextField, VContainer, VRow, VCol, VSnackbar, VBtn, VProgressCircular  } from 'vuetify/components';
+import {  watch } from 'vue';
 export default  defineComponent({
   props: {
     username: String,
@@ -26,7 +28,7 @@ export default  defineComponent({
     const signOutUser = async () => { 
       await signOut();
       emit('update-user', { username:"" || "", isLoggedIn: false });
-
+    }
 
     const updateUsername = async () => {
       if (!rules.required(newUsername.value)) {
@@ -87,13 +89,32 @@ export default  defineComponent({
         emit('update-user', { username: '', isLoggedIn: false }); // Notify parent if no user data
       } finally {
         console.log("User data loaded successfully.")
-        isLoading.value = false; // Set loading to false once data fetching is complete
+         // Set loading to false once data fetching is complete
       }
     };
 
-
+   
     loadUserData();
 
+    const auth = useAuthenticator();
+
+    watch (
+       () => auth.authStatus,
+       async(newStatus) => {
+   
+        if ( newStatus == 'authenticated') {
+     
+          
+          await loadUserData();
+          isLoading.value = false;
+        
+          return;
+        }
+      
+     
+      }
+    )
+  
 
     return {
       rules,

@@ -12,7 +12,7 @@
               width="7"
             ></v-progress-circular>
             <p class="loading-text">Loading your profile...</p>
-          </div>
+          </div>         
           <div v-else>
             <!-- Edit box for changing the username -->
             <div class="edit-username">
@@ -37,7 +37,7 @@
                   >
                     Update Username
                   </v-btn>
-                  <v-btn class="mt-4" color="error" block @click="signOut">
+                  <v-btn class="mt-4" color="error" block @click="signOutUser">
                     Sign Out
                   </v-btn>
                 </v-col>
