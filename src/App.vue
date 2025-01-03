@@ -7,7 +7,7 @@
       </div>
       <div class="auth-section">
         <template v-if="isLoading">
-          <span>Loading...</span> <!-- Show a loading indicator -->
+          <span>Loading...</span>
         </template>
         <template v-else-if="isLoggedIn">
           Welcome, <span class="nickname">{{ username }}</span>!
@@ -19,11 +19,10 @@
     </nav>
 
     <div class="content">
-      <router-view></router-view> <!-- This is where the routed components will be displayed -->
+      <router-view @update-user="handleUserUpdate"></router-view>
     </div>
   </div>
 </template>
-
 
 <script>
 import defineComponent from './app.js';
