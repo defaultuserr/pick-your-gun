@@ -23,6 +23,10 @@ export default  defineComponent({
     const snackbarVisible = ref(false); // Snackbar visibility
     const isError = ref(false);
     const isLoading = ref(true);
+    const signOutUser = async () => { 
+      await signOut();
+      emit('update-user', { username:"" || "", isLoggedIn: false });
+
 
     const updateUsername = async () => {
       if (!rules.required(newUsername.value)) {
@@ -30,7 +34,7 @@ export default  defineComponent({
         isError.value = true;
         return;
       }
-
+      
       try {
         const output = await updateUserAttribute({
           userAttribute: {
@@ -67,7 +71,14 @@ export default  defineComponent({
     const loadUserData = async () => {
       try {
         const user_attr = await fetchUserAttributes();
-        newUsername.value = user_attr.nickname || await generateRandomUsername();
+        if (user_attr.nickname) {
+          newUsername.value = user_attr.nickname;
+        } else {
+          newUsername.value =  await generateRandomUsername();
+
+          updateUsername(newUsername);
+        }
+        
        // Emit the loaded user data to the parent
        emit('update-user', { username: newUsername.value, isLoggedIn: true });
       }
@@ -91,7 +102,8 @@ export default  defineComponent({
       feedbackMessage,
       isError,
       newUsername,
-      isLoading
+      isLoading,
+      signOutUser
    
     }
   },
