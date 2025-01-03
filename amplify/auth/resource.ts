@@ -23,7 +23,7 @@ export const auth = defineAuth({
         'http://localhost:5173/sign-in',
         'https://mywebsite.com/profile'
       ],
-      logoutUrls: ['http://localhost:5173/sign-in', 'https://mywebsite.com/sign-in'],
+      logoutUrls: ['http://localhost:5173', 'https://mywebsite.com/sign-in'],
     }
   }
 });

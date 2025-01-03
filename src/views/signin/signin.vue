@@ -1,47 +1,65 @@
 <template>
+<v-container class="user-profile" fluid>
   <authenticator :sign-up-attributes="['nickname']" :social-providers="['google']">
     <template v-slot="{ user, signOut }">
       <div class="user-profile">
-        <!-- Display current username -->
-        <h1>Hello {{ newUsername }}!</h1>
+  
 
         <!-- Edit box for changing the username -->
         <div class="edit-username">
-          <label for="username">Edit Username:</label>
-          <input
-            id="username"
-            type="text"
-            v-model="newUsername"
-            :placeholder=newUsername
-          />
-          <button @click="updateUsername">Update Username</button>
+
+
+
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <h1 class="text-center">Hello, {{ newUsername }}!</h1>
+
+        <v-text-field
+          label="Nickname others users see"
+          v-model="newUsername"
+          outlined
+          :rules="[rules.required]"
+          :error="!newUsername.trim() && isError"
+        ></v-text-field>
+
+        <v-btn
+          class="mt-4"
+          color="primary"
+          block
+          :disabled="!newUsername.trim()" 
+          @click="updateUsername"
+        >
+          Update Username
+        </v-btn>
+        <v-btn class="mt-4" color="error" block @click="signOut">
+          Sign Out
+        </v-btn>
+      </v-col>
+    </v-row>
+
+      
+          
+         
         </div>
-
-        <!-- Confirmation message -->
-        <p v-if="message" class="message">{{ message }}</p>
-
-        <!-- Sign out button -->
-        <button @click="signOut">Sign Out</button>
       </div>
     </template>
   </authenticator>
+
+    <v-snackbar v-model="snackbarVisible" :color="isError ? 'red' : 'green'" top>
+      {{ feedbackMessage }}
+      <template #actions>
+        <v-btn text @click="snackbarVisible = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+    </v-container>
 </template>
 
 <script>import '@aws-amplify/ui-vue/styles.css';
 
-import { generateRandomUsername} from '../../shared.js';
-export default {
-  data() {
-    return {
-      newUsername: '', // Prefilled random username
-      message: '', // Feedback message
-    };
-  },
-  async mounted() {
-    // Generate a random username when the site loads
-    this.newUsername = await generateRandomUsername();
-  },
+import defineComponent from './signin.js';
 
+export default {
+  ...defineComponent,
 };
 </script>
 

@@ -44,7 +44,7 @@ const schema = a.schema({
   })
   .secondaryIndexes((index) => [index('genre')]) // Index for title for better search performance
   .authorization((allow) => [allow.publicApiKey()]),
- //   
+ // used to retrieve data for genres api
   getData: a
   .query()
   .arguments({

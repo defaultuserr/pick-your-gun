@@ -60,7 +60,7 @@ export default defineComponent({
           }
 
           const finalImageUrl = presignedUrl || defaultImage;
-
+          console.log("presignedUrl", presignedUrl)
           // Wait for the browser to load this image
           await checkImageLoaded(finalImageUrl);
 
