@@ -15,21 +15,27 @@ export default defineComponent({
     const route = useRoute();
     const client = generateClient();
     const character = ref(null);
-    let characterImage = "images/examples/ranger.jpg";
+    const loading = ref(true); // New loading state
+    let characterImage = ref(null);
+
     const fetchCharacterDetails = async () => {
+
       try {
         const characterId = route.params.id;
         const { data, errors } = await client.models.CosplayRecommendation.get({ id: characterId });
         if (errors) {
           console.error('Error fetching character details:', errors);
         } else {
-          data.key_items = transformKeyItems(data.key_items)
-          characterImage = data.image_url;
+          data.key_items = transformKeyItems(data.key_items);
           character.value = data;
-          console.log(data);
+          characterImage.value = await getCharacterImage(data.image_url);
+
+          
         }
       } catch (error) {
         console.error('Error fetching character details:', error);
+      } finally {
+        loading.value = false; // Set loading to false after fetching
       }
     };
 
@@ -41,32 +47,33 @@ export default defineComponent({
       const randomIndex = Math.floor(Math.random() * randomImagePaths.length);
       return randomImagePaths[randomIndex];
     };
-    const getCharacterImage = async () => {
-     
-      let presignedUrl = await getPresignedUrl(characterImage);
-    console.log(presignedUrl);
+
+    const getCharacterImage = async (path) => {
+
+      let presignedUrl = await getPresignedUrl(path);
+      console.log("Presigned URL: ");
+      console.log(presignedUrl);
       return presignedUrl || defaultImage;
     };
+
     function transformKeyItems(stringsArray) {
       return stringsArray.map((str) => {
         if (typeof str !== "string") {
           console.error("Invalid item; expected a string:", str);
-          return null; // Skip non-string items
+          return null;
         }
-    
-        // Remove curly braces and split into key-value pairs
+
         const withoutBraces = str.slice(1, -1);
         const keyValuePairs = withoutBraces.split(", ");
-    
-        // Create an object from the key-value pairs
+
         const obj = {};
         keyValuePairs.forEach((pair) => {
           const [key, value] = pair.split("=");
-          obj[key] = value; // Assign the key and value to the object
+          obj[key] = value;
         });
-    
+
         return obj;
-      }).filter((item) => item !== null); // Remove null items
+      }).filter((item) => item !== null);
     }
 
     onMounted(fetchCharacterDetails);
@@ -75,9 +82,11 @@ export default defineComponent({
       character,
       logItem,
       defaultImage, 
+      characterImage,
       defaultImageItem,
       getRandomImage,
-      getCharacterImage
+      getCharacterImage,
+      loading, // Expose the loading state
     };
   },
 });

@@ -1,20 +1,32 @@
 <template>
   <div v-if="character" class="character-details">
     <div class="character-card">
-      <img :src="getCharacterImage()" alt="Character Image" class="character-image" />
+      <img 
+        :src="characterImage || defaultImage" 
+        alt="Character Image" 
+        class="character-image" 
+      />
       <div class="character-info">
         <h1>{{ character.character }}</h1>
         <p><strong>Difficulty:</strong> {{ character.difficulty }}</p>
         <p><strong>Key Items:</strong></p>
         <div class="key-items">
+          <!-- Render placeholders if loading -->
+          <div v-if="loading" class="key-item-card placeholder" v-for="i in 3" :key="'placeholder-' + i">
+            <div class="placeholder-image"></div>
+            <p class="placeholder-title">Loading...</p>
+          </div>
+
+          <!-- Render actual items when not loading -->
           <div 
+            v-else 
             v-for="item in character.key_items" 
             :key="item.item" 
             class="key-item-card"
           >
             <a :href="item.affiliate_link" target="_blank" @click.prevent="logItem(item)">
-              <img :src="getRandomImage()" :alt="item.item" class="key-item-image" />
-             <p class="key-item-title">{{ item.item || 'Placeholder Title' }}</p> <!-- Fallback for missing title -->
+              <img :src="item.image || defaultImageItem" :alt="item.item" class="key-item-image" />
+              <p class="key-item-title">{{ item.item || 'Placeholder Title' }}</p>
             </a>
           </div>
         </div>
@@ -25,8 +37,6 @@
     <p>Loading character details...</p>
   </div>
 </template>
-
-
 
 
 
@@ -144,5 +154,26 @@ p {
   font-size: 1em;
   font-weight: bold;
   text-align: center;
+}
+
+.placeholder {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+  opacity: 0.7;
+}
+
+.placeholder-image {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.placeholder-title {
+  color: #999;
+  font-size: 14px;
 }
 </style>
