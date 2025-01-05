@@ -42,10 +42,15 @@ export default defineComponent({
           console.error('Error fetching movie:', movieErrors);
           return;
         }
+ 
         movie.value = mediaData;
 
         // 2. Fetch the Cosplay Recommendations (characters)
-        const { data: recommendations } = await mediaData.cosplay_recommendations();
+        const { data: recommendations, errors: cosplayErrors } = await mediaData.cosplay_recommendations();
+        if (cosplayErrors) {
+          console.error('Error fetching characters:', cosplayErrors);
+          return;
+        }
         
         // 3. For each recommendation:
         //    - Get presigned image URL or fallback

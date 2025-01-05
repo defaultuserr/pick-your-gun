@@ -3,7 +3,7 @@ import { generateClient } from 'aws-amplify/data';
 import { useRoute } from 'vue-router';
 import defaultImage from '@/assets/images/ranger.jpg'; 
 import defaultImageItem from '@/assets/images/item1.jpg'; 
-
+import { getPresignedUrl } from '../shared.js';
 const images = import.meta.glob('@/assets/images/*.jpg', { eager: true });
 const randomImagePaths = Object.values(images).map((image) => image.default);
 
@@ -15,7 +15,7 @@ export default defineComponent({
     const route = useRoute();
     const client = generateClient();
     const character = ref(null);
-
+    let characterImage = "images/examples/ranger.jpg";
     const fetchCharacterDetails = async () => {
       try {
         const characterId = route.params.id;
@@ -24,8 +24,9 @@ export default defineComponent({
           console.error('Error fetching character details:', errors);
         } else {
           data.key_items = transformKeyItems(data.key_items)
+          characterImage = data.image_url;
           character.value = data;
-          console.log("my key items");
+          console.log(data);
         }
       } catch (error) {
         console.error('Error fetching character details:', error);
@@ -40,7 +41,12 @@ export default defineComponent({
       const randomIndex = Math.floor(Math.random() * randomImagePaths.length);
       return randomImagePaths[randomIndex];
     };
-
+    const getCharacterImage = async () => {
+     
+      let presignedUrl = await getPresignedUrl(characterImage);
+    console.log(presignedUrl);
+      return presignedUrl || defaultImage;
+    };
     function transformKeyItems(stringsArray) {
       return stringsArray.map((str) => {
         if (typeof str !== "string") {
@@ -71,6 +77,7 @@ export default defineComponent({
       defaultImage, 
       defaultImageItem,
       getRandomImage,
+      getCharacterImage
     };
   },
 });

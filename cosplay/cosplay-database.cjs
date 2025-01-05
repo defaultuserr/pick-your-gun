@@ -106,6 +106,7 @@ const { errors: errors, data: newMedia } = await client.models.CosplayRecommenda
   difficulty: recommendation.difficulty,  // Include type attribute
   key_items: recommendation.key_items,
   image_url: recommendation.image_url,
+  submittedBy: "Anyonymous",
 
 });
 

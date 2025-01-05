@@ -95,11 +95,18 @@
       </v-card-text>
     </v-card>
 
-<!-- Snackbar Notification -->
-    <v-snackbar v-model="notification.show" :timeout="notification.timeout" top>
-      {{ notification.message }}
-      <v-btn text @click="notification.show = false">Close</v-btn>
-    </v-snackbar>
+      <div class="notificationContainer">
+      <v-slide-y-transition group>
+        <v-alert
+          v-for="(notification, index) in notifications"
+          :key="index"
+          theme="dark"
+          type="success"
+        >
+          {{ notification.message }}
+        </v-alert>
+      </v-slide-y-transition>
+    </div>
 
   </v-container>
 </template>
@@ -117,7 +124,15 @@ export default {
   max-width: 600px;
   margin: auto;
 }
-
+.notificationContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-gap: 0.5em;
+  z-index: 99;
+}
 
 .v-card .pa-3 {
   padding: 16px;

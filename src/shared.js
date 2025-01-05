@@ -93,6 +93,7 @@ export async function generateRandomUsername() {
   };
 
   export const getPresignedUrl = async (file_path) => {
+    console.log("file_path", file_path)
   const linkToStorageFile = await getUrl({
     path: file_path,
     // Alternatively, path: ({identityId}) => `album/{identityId}/1.jpg`
