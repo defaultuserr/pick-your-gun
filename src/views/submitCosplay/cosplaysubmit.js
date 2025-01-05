@@ -1,95 +1,74 @@
 
-import { defineComponent, ref } from 'vue';
-import {VTextarea,VCardTitle,VFileInput,VCardText,VCard, VSelect, VTextField,VForm, VIcon, VContainer, VRow, VCol, VSnackbar, VBtn, VProgressCircular  } from 'vuetify/components';
-
-
-
+import { defineComponent } from 'vue';
+import {VAutocomplete,VFileInput,VCard, VCardText,VForm,  VTextarea, VIcon, VCombobox, VSelect, VCardTitle, VTextField, VContainer, VRow, VCol, VSnackbar, VBtn, VProgressCircular  } from 'vuetify/components';
+import { fetchAllPaginatedData } from '../../shared.js';
+import { generateClient } from 'aws-amplify/data';
 export default defineComponent({
     components: {
-        VBtn,
-        VTextarea,
-        VCardTitle,
-        VTextField, 
+        VAutocomplete,
         VFileInput,
+        VTextarea,
+        VCard,
+        VCardText,
+        VCombobox,
+        VForm,
+        VIcon,
+        VSelect,
+        VBtn,
+        VCardTitle,
+        VTextField,
         VContainer,
         VRow,
-        VCardText,
-        VCard,
-      VSelect,
-        VIcon,
         VCol,
-        VForm,
         VSnackbar,
         VProgressCircular 
       },
+    
     data() {
       return {
-        formValid: false,
         form: {
-          character: "",
-          media_type: "",
-          media_title: "",
+          characterName: "",
+          mediaType: "",
+          mediaTitle: "",
           difficulty: "",
-          item_links: [{ item_name: "", link: "" }],
-          images: [],
-          description: "",
+          items: [
+            { name: "", link: "" }
+          ],
+          image: null,
+          description: ""
         },
-        mediaTypes: ["Video", "Game", "Manga", "Other"],
-        difficultyLevels: ["Easy", "Medium", "Hard", "Expert"],
-        rules: {
-            required: (value) => !!value || "This field is required",
-          }
+        mediaTypes: ["Manga", "Movie", "Video Game", "Other"],
+        mediaTitles: ["Naruto", "One Piece", "Final Fantasy", "Harry Potter"], // Replace with backend data
+        difficultyLevels: ["Easy", "Medium", "Hard"]
       };
     },
     methods: {
-      addItemLink() {
-        this.form.item_links.push({ item_name: "", link: "" });
+        async fetchMediaTitles() {
+            const client = generateClient();
+            try {
+              // Replace this URL with your backend endpoint
+              let media  = await fetchAllPaginatedData(client, 'Media');
+              console.log(media);
+           
+            
+              this.mediaTitles = media; // Assuming the API returns an object with a `titles` array
+            } catch (error) {
+              console.error('Error fetching media titles:', error);
+            }
+          }
+,          
+      addItem() {
+        this.form.items.push({ name: "", link: "" });
       },
-
-      handleSubmit() {
-        if (this.$refs.form.validate()) {
-          // Form is valid, handle submission logic
-          console.log("Form submitted successfully", this.form);
-        } else {
-          console.log("Form has validation errors");
-        }
+      removeItem(index) {
+        this.form.items.splice(index, 1);
       },
-
-      removeItemLink(index) {
-        this.form.item_links.splice(index, 1);
-      },
-      async handleSubmit() {
-        // Validate and prepare form data for submission
-        const submissionData = {
-          ...this.form,
-          submissionDate: new Date().toISOString().split("T")[0], // AWSDate format
-        };
-  
-        try {
-          // Make an API call to submit the form
-          await this.submitCosplay(submissionData);
-          this.$refs.form.reset();
-          this.resetForm();
-          this.$emit("submission-success");
-        } catch (error) {
-          console.error("Error submitting cosplay:", error);
-          this.$emit("submission-failure");
-        }
-      },
-      async submitCosplay(data) {
-        // Replace this with your API call logic
-        console.log("Submitting cosplay:", data);
-      },
-      resetForm() {
-        this.form = {
-          character: "",
-          media_type: "",
-          media_title: "",
-          difficulty: "",
-          item_links: [{ item_name: "", link: "" }],
-          images: [],
-          description: "",
-        };
-      },
+      submitForm() {
+        console.log("Form submitted", this.form);
+        // Add your form submission logic here, e.g., send data to backend
+      }
     },
+    created() {
+        this.fetchMediaTitles();
+      }
   });

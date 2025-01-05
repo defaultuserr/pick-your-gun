@@ -100,8 +100,8 @@ const createCosplayRecommendation = async (mediaId, recommendation) => {
 console.log("recommendation")
 console.log(recommendation)
 const { errors: errors, data: newMedia } = await client.models.CosplayRecommendation.create({
-  id: String(uuidv4()),  // Generate a new ID for the movie
-  mediaId: mediaId,  // Include type attribute
+  id: String(uuidv4()),  // Generate a new ID for the cosplay
+  mediaId: mediaId,  
   character: recommendation.character,
   difficulty: recommendation.difficulty,  // Include type attribute
   key_items: recommendation.key_items,
