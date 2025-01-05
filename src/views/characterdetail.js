@@ -15,11 +15,10 @@ export default defineComponent({
     const route = useRoute();
     const client = generateClient();
     const character = ref(null);
-    const loading = ref(true); // New loading state
-    let characterImage = ref(null);
+    const loading = ref(true); // State for skeleton loader
+    const characterImage = ref(null);
 
     const fetchCharacterDetails = async () => {
-
       try {
         const characterId = route.params.id;
         const { data, errors } = await client.models.CosplayRecommendation.get({ id: characterId });
@@ -28,32 +27,33 @@ export default defineComponent({
         } else {
           data.key_items = transformKeyItems(data.key_items);
           character.value = data;
-          characterImage.value = await getCharacterImage(data.image_url);
 
-          
+          // Fetch the presigned URL for the character image
+          characterImage.value = await getCharacterImage(data.image_url);
+          console.log('Character:', characterImage.value);
+          loading.value = false; // Stop loading skeleton once the character details are fetched
         }
       } catch (error) {
         console.error('Error fetching character details:', error);
-      } finally {
-        loading.value = false; // Set loading to false after fetching
+      } 
+    };
+
+    const getCharacterImage = async (path) => {
+      try {
+        const presignedUrl = await getPresignedUrl(path);
+        return presignedUrl || defaultImage;
+      } catch (error) {
+        console.error('Error fetching character image:', error);
+        return defaultImage;
       }
+    };
+
+    const onImageLoad = () => {
+      loading.value = false; // Stop loading skeleton once the image is loaded
     };
 
     const logItem = (item) => {
       console.log('Clicked Item:', item);
-    };
-
-    const getRandomImage = () => {
-      const randomIndex = Math.floor(Math.random() * randomImagePaths.length);
-      return randomImagePaths[randomIndex];
-    };
-
-    const getCharacterImage = async (path) => {
-
-      let presignedUrl = await getPresignedUrl(path);
-      console.log("Presigned URL: ");
-      console.log(presignedUrl);
-      return presignedUrl || defaultImage;
     };
 
     function transformKeyItems(stringsArray) {
@@ -81,12 +81,11 @@ export default defineComponent({
     return {
       character,
       logItem,
-      defaultImage, 
+      defaultImage,
       characterImage,
       defaultImageItem,
-      getRandomImage,
-      getCharacterImage,
       loading, // Expose the loading state
+      onImageLoad,
     };
   },
 });
