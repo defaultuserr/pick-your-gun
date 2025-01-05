@@ -39,7 +39,12 @@ export default defineComponent({
         },
         mediaTypes: ["Manga", "Movie", "Video Game", "Other"],
         mediaTitles: ["Naruto", "One Piece", "Final Fantasy", "Harry Potter"], // Replace with backend data
-        difficultyLevels: ["Easy", "Medium", "Hard"]
+        difficultyLevels: ["Easy", "Medium", "Hard"],
+        notification: {
+            show: false,
+            message: "",
+            timeout: 3000
+          }
       };
     },
     methods: {
@@ -63,7 +68,36 @@ export default defineComponent({
       removeItem(index) {
         this.form.items.splice(index, 1);
       },
-      submitForm() {
+      async  submitForm() {
+
+        const client = generateClient();
+        console.log("type  of")
+        console.log(typeof this.form.mediaTitle)
+
+        // every media is  an object
+        if (typeof this.form.mediaTitle === "string") {
+            const { errors: errors, data: newMedia } = await client.models.Media.create({
+          
+                type: this.form.mediaType,
+                title: this.form.mediaTitle,
+                genre: "default",
+                genre_lowercase: "default",
+                release_year: 1000,
+            });
+            console.log(newMedia)
+            if (newMedia) {
+                console.log("Media created successfully:", newMedia.id);
+                this.notification.message = "Media " + newMedia.title+ " created successfully!";
+                this.notification.show = true;
+              }
+            
+           }
+        // create  cosplay  recommendation
+
+
+
+
+
         console.log("Form submitted", this.form);
         // Add your form submission logic here, e.g., send data to backend
       }

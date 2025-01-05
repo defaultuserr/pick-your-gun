@@ -9,7 +9,14 @@ export const sharedMethods = {
   export const sharedData = {
     sharedMessage: "This is shared data.",
   };
-  
+  export async function mediaExists   (client, title)  {
+    const movies = await fetchAllPaginatedData(client, 'Media', { title: { eq: title } });
+    console.log("in den movies")
+    console.log(movies)
+    console.log(title)
+    console.log(movies.length > 0)
+    return movies.length > 0;
+  };
 
 // Function to fetch JSON data from a URL
 async function fetchJSON(filePath) {

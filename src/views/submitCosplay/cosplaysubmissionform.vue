@@ -42,7 +42,7 @@
           ></v-select>
 
           <!-- Items -->
-          <v-card class="pa-3 mt-3">
+               <v-card class="pa-3 mt-3">
             <v-card-title>Items</v-card-title>
             <v-card-text>
               <div v-for="(item, index) in form.items" :key="index" class="d-flex align-center mb-2">
@@ -57,9 +57,10 @@
                   v-model="item.link"
                   label="Item Link"
                   outlined
+                  class="mr-2"
                   required
                 ></v-text-field>
-                <v-btn icon color="red" @click="removeItem(index)">
+                <v-btn icon color="red" class="ml-2 align-self-center" @click="removeItem(index)">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </div>
@@ -67,7 +68,8 @@
             </v-card-text>
           </v-card>
 
-             <v-card class="pa-3 mt-3">
+          <!-- Upload Image -->
+          <v-card class="pa-3 mt-3">
             <v-card-title>Upload Cosplay Image</v-card-title>
             <v-card-text>
               <v-file-input
@@ -92,6 +94,13 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+<!-- Snackbar Notification -->
+    <v-snackbar v-model="notification.show" :timeout="notification.timeout" top>
+      {{ notification.message }}
+      <v-btn text @click="notification.show = false">Close</v-btn>
+    </v-snackbar>
+
   </v-container>
 </template>
 <script>import '@aws-amplify/ui-vue/styles.css';
