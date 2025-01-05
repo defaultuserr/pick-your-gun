@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     exploreCosplays() {
+      router.push('/submit-cosplay');
       console.log('Redirecting to explore cosplays');
     },
     handleFileUpload(event) {

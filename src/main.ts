@@ -10,10 +10,16 @@ import AmplifyVue from '@aws-amplify/ui-vue';
 import 'vuetify/styles'; 
 import { createVuetify } from 'vuetify';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import '@mdi/font/css/materialdesignicons.css'; // Import Material Design Icons
 
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi';
 const vuetify = createVuetify({
     icons: {
-      defaultSet: 'mdi', // Default icon set
+      defaultSet: 'mdi', 
+      aliases,
+      sets: {
+        mdi,
+      },
     },
   });
 Amplify.configure(outputs);

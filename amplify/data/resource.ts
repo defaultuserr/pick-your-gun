@@ -32,6 +32,22 @@ const schema = a.schema({
     key_items: a.string().array(), // List of specific cosplay items
     image_url: a.string(), // URL for character image
     media: a.belongsTo('Media', 'mediaId'), // One-to-one relationship
+    description: a.string(), // New
+    submittedBy: a.string().required(), // New
+    submissionDate: a.datetime(),
+    status: a.string().default('pending'), // New
+    likes: a.integer().default(0), // New
+    comments: a.string().array(), // New
+    views: a.integer().default(0), // New
+    sourceUrl: a.string(), // New
+    tags: a.string().array(), // New
+    contestParticipation: a.boolean().default(false), // New
+    featured: a.boolean().default(false), // New
+    pointsEarned: a.integer().default(0), // New
+    badgeEarned: a.string(), // New
+    reported: a.boolean().default(false), // New
+    reportReasons: a.string().array() // New
+  
   })
   .authorization((allow) => [allow.publicApiKey()]),
 //genre model
