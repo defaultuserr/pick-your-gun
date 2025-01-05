@@ -12,14 +12,11 @@ import { createVuetify } from 'vuetify';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import '@mdi/font/css/materialdesignicons.css'; // Import Material Design Icons
 
-import { aliases, mdi } from 'vuetify/lib/iconsets/mdi';
 const vuetify = createVuetify({
     icons: {
       defaultSet: 'mdi', 
-      aliases,
-      sets: {
-        mdi,
-      },
+    
+   
     },
   });
 Amplify.configure(outputs);
