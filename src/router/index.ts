@@ -6,6 +6,7 @@ import CharacterDetail from '../views/CharacterDetail.vue'; // Import Character 
 import MediaDetail from '../views/MediaDetail.vue';
 import SignIn from "../views/signin/signin.vue"
 import cosplaysubmitform from "../views/submitCosplay/cosplaysubmissionform.vue"
+import ai from '../views/ai/ai.vue'
 const routes: Array<RouteRecordRaw> = [
   { path: '/', name: 'Home', component: Home },
   { path: '/movies', name: 'Movies', component: Movies },
@@ -16,7 +17,9 @@ const routes: Array<RouteRecordRaw> = [
     component: CharacterDetail, 
   },
   { path: '/sign-in', component: SignIn },
-  {path: '/submit', component: cosplaysubmitform}
+  {path: '/submit', component: cosplaysubmitform},
+  {path: '/ai', component: ai}
+
   
 ];
 
