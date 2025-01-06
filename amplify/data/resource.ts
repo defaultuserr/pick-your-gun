@@ -68,6 +68,24 @@ const schema = a.schema({
   })
   .returns(a.string())
   .handler(a.handler.function(getData)).authorization((allow) => [allow.publicApiKey()]),
+
+  identifyText: a
+    .query()
+    .arguments({
+      path: a.string(),
+    })
+    .returns(a.string())
+    .authorization((allow) => [allow.publicApiKey()])
+    .handler(
+      a.handler.custom({
+        entry: "./identifyText.js",
+        dataSource: "RekognitionDataSource",
+      })
+    ),
+
+
+
+
 });
 
 

@@ -9,6 +9,10 @@ export const storage = defineStorage({
     'images/users/*': [
       allow.guest.to(['read']), 
       allow.authenticated.to(['read', 'write'])
-    ]
-  })
+    ],
+    'images/predictions/*': [
+      allow.guest.to(['read']), // additional actions such as "write" and "delete" can be specified depending on your use case
+      allow.authenticated.to(['list', 'write', 'get'])
+    ],
+  }),
 });
